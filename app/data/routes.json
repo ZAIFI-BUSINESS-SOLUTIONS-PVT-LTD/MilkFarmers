@@ -1,0 +1,86 @@
+[
+  {
+    "id": "R001",
+    "name": "Route A – Andheri West",
+    "area": "Andheri West",
+    "execId": "E001",
+    "execName": "Mohan Das",
+    "stops": [
+      {
+        "customerId": "C001",
+        "name": "Priya Sharma",
+        "address": "Flat 4B, Sunflower Apartments, Andheri West",
+        "quantityMl": 500,
+        "plan": "Toned",
+        "status": "delivered"
+      },
+      {
+        "customerId": "C002",
+        "name": "Ramesh Patel",
+        "address": "House 12, Green Colony, Andheri West",
+        "quantityMl": 1000,
+        "plan": "Full Cream",
+        "status": "delivered"
+      },
+      {
+        "customerId": "C003",
+        "name": "Meera Iyer",
+        "address": "201, Block C, Lotus Heights, Andheri West",
+        "quantityMl": 500,
+        "plan": "A2 Gir",
+        "status": "skipped",
+        "skipReason": "Subscription paused"
+      }
+    ]
+  },
+  {
+    "id": "R002",
+    "name": "Route B – Juhu",
+    "area": "Juhu",
+    "execId": "E002",
+    "execName": "Raju Singh",
+    "stops": [
+      {
+        "customerId": "C004",
+        "name": "Arjun Nair",
+        "address": "Flat 7A, Silver Oak, Juhu",
+        "quantityMl": 1000,
+        "plan": "Toned",
+        "status": "delivered"
+      },
+      {
+        "customerId": "C006",
+        "name": "Vikram Mehta",
+        "address": "302, Tower B, Marina View, Juhu",
+        "quantityMl": 1000,
+        "plan": "A2 Gir",
+        "status": "pending"
+      }
+    ]
+  },
+  {
+    "id": "R003",
+    "name": "Route C – Versova",
+    "area": "Versova",
+    "execId": "E003",
+    "execName": "Prakash Rao",
+    "stops": [
+      {
+        "customerId": "C007",
+        "name": "Kavitha Reddy",
+        "address": "Flat 1A, Rosewood, Versova",
+        "quantityMl": 500,
+        "plan": "Toned",
+        "status": "pending"
+      },
+      {
+        "customerId": "C008",
+        "name": "Suresh Kumar",
+        "address": "House 3, Fishermen Lane, Versova",
+        "quantityMl": 1000,
+        "plan": "Full Cream",
+        "status": "pending"
+      }
+    ]
+  }
+]

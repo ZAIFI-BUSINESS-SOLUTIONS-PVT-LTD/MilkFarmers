@@ -1,0 +1,82 @@
+[
+  {
+    "id": "P001",
+    "customerId": "C001",
+    "amount": 900,
+    "date": "2026-06-01",
+    "status": "paid",
+    "description": "June subscription – Toned 500ml"
+  },
+  {
+    "id": "P002",
+    "customerId": "C001",
+    "amount": 900,
+    "date": "2026-05-01",
+    "status": "paid",
+    "description": "May subscription – Toned 500ml"
+  },
+  {
+    "id": "P003",
+    "customerId": "C001",
+    "amount": 900,
+    "date": "2026-04-01",
+    "status": "paid",
+    "description": "April subscription – Toned 500ml"
+  },
+  {
+    "id": "P004",
+    "customerId": "C001",
+    "amount": 900,
+    "date": "2026-07-01",
+    "status": "pending",
+    "description": "July subscription – Toned 500ml"
+  },
+  {
+    "id": "P005",
+    "customerId": "C002",
+    "amount": 2160,
+    "date": "2026-06-01",
+    "status": "paid",
+    "description": "June subscription – Full Cream 1000ml"
+  },
+  {
+    "id": "P006",
+    "customerId": "C002",
+    "amount": 2160,
+    "date": "2026-07-01",
+    "status": "pending",
+    "description": "July subscription – Full Cream 1000ml"
+  },
+  {
+    "id": "P007",
+    "customerId": "C003",
+    "amount": 1650,
+    "date": "2026-06-01",
+    "status": "paid",
+    "description": "June subscription – A2 Gir 500ml"
+  },
+  {
+    "id": "P008",
+    "customerId": "C004",
+    "amount": 1800,
+    "date": "2026-06-01",
+    "status": "paid",
+    "description": "June subscription – Toned 1000ml"
+  },
+  {
+    "id": "P009",
+    "customerId": "C006",
+    "amount": 3300,
+    "date": "2026-06-01",
+    "status": "paid",
+    "description": "June subscription – A2 Gir 1000ml"
+  },
+  {
+    "id": "P010",
+    "customerId": "C006",
+    "amount": 3300,
+    "date": "2026-05-01",
+    "status": "failed",
+    "description": "May subscription – A2 Gir 1000ml"
+  }
+]

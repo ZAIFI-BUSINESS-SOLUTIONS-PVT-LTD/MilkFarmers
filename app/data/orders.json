@@ -1,0 +1,44 @@
+[
+  {
+    "id": "O001",
+    "name": "Toned Milk",
+    "unit": "500ml",
+    "pricePerUnit": 30,
+    "category": "milk"
+  },
+  {
+    "id": "O002",
+    "name": "Full Cream Milk",
+    "unit": "500ml",
+    "pricePerUnit": 36,
+    "category": "milk"
+  },
+  {
+    "id": "O003",
+    "name": "A2 Gir Milk",
+    "unit": "500ml",
+    "pricePerUnit": 55,
+    "category": "milk"
+  },
+  {
+    "id": "O004",
+    "name": "Fresh Paneer",
+    "unit": "200g",
+    "pricePerUnit": 80,
+    "category": "dairy"
+  },
+  {
+    "id": "O005",
+    "name": "Curd",
+    "unit": "400g",
+    "pricePerUnit": 45,
+    "category": "dairy"
+  },
+  {
+    "id": "O006",
+    "name": "Buttermilk",
+    "unit": "200ml",
+    "pricePerUnit": 20,
+    "category": "dairy"
+  }
+]

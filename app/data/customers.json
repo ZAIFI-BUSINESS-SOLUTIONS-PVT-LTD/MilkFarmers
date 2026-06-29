@@ -1,0 +1,156 @@
+[
+  {
+    "id": "C001",
+    "name": "Priya Sharma",
+    "phone": "9876543210",
+    "flat": "Flat 4B",
+    "building": "Sunflower Apartments",
+    "area": "Andheri West",
+    "pincode": "400058",
+    "routeId": "R001",
+    "subscription": {
+      "id": "S001",
+      "plan": "toned",
+      "quantityMl": 500,
+      "pricePerLitre": 60,
+      "status": "active",
+      "startDate": "2026-01-15"
+    },
+    "joinDate": "2026-01-15"
+  },
+  {
+    "id": "C002",
+    "name": "Ramesh Patel",
+    "phone": "9823456789",
+    "flat": "House 12",
+    "building": "Green Colony",
+    "area": "Andheri West",
+    "pincode": "400058",
+    "routeId": "R001",
+    "subscription": {
+      "id": "S002",
+      "plan": "full_cream",
+      "quantityMl": 1000,
+      "pricePerLitre": 72,
+      "status": "active",
+      "startDate": "2025-11-01"
+    },
+    "joinDate": "2025-11-01"
+  },
+  {
+    "id": "C003",
+    "name": "Meera Iyer",
+    "phone": "9845612300",
+    "flat": "201, Block C",
+    "building": "Lotus Heights",
+    "area": "Andheri West",
+    "pincode": "400058",
+    "routeId": "R001",
+    "subscription": {
+      "id": "S003",
+      "plan": "a2_gir",
+      "quantityMl": 500,
+      "pricePerLitre": 110,
+      "status": "paused",
+      "startDate": "2025-12-01",
+      "pauseFrom": "2026-06-25",
+      "pauseTo": "2026-07-10"
+    },
+    "joinDate": "2025-12-01"
+  },
+  {
+    "id": "C004",
+    "name": "Arjun Nair",
+    "phone": "9912345678",
+    "flat": "Flat 7A",
+    "building": "Silver Oak",
+    "area": "Juhu",
+    "pincode": "400049",
+    "routeId": "R002",
+    "subscription": {
+      "id": "S004",
+      "plan": "toned",
+      "quantityMl": 1000,
+      "pricePerLitre": 60,
+      "status": "active",
+      "startDate": "2026-03-01"
+    },
+    "joinDate": "2026-03-01"
+  },
+  {
+    "id": "C005",
+    "name": "Sunita Desai",
+    "phone": "9867432100",
+    "flat": "Bungalow 5",
+    "building": "Palm Grove",
+    "area": "Juhu",
+    "pincode": "400049",
+    "routeId": "R002",
+    "subscription": {
+      "id": "S005",
+      "plan": "full_cream",
+      "quantityMl": 500,
+      "pricePerLitre": 72,
+      "status": "churned",
+      "startDate": "2025-09-01"
+    },
+    "joinDate": "2025-09-01"
+  },
+  {
+    "id": "C006",
+    "name": "Vikram Mehta",
+    "phone": "9734512890",
+    "flat": "302, Tower B",
+    "building": "Marina View",
+    "area": "Juhu",
+    "pincode": "400049",
+    "routeId": "R002",
+    "subscription": {
+      "id": "S006",
+      "plan": "a2_gir",
+      "quantityMl": 1000,
+      "pricePerLitre": 110,
+      "status": "active",
+      "startDate": "2026-02-14"
+    },
+    "joinDate": "2026-02-14"
+  },
+  {
+    "id": "C007",
+    "name": "Kavitha Reddy",
+    "phone": "9801234567",
+    "flat": "Flat 1A",
+    "building": "Rosewood",
+    "area": "Versova",
+    "pincode": "400061",
+    "routeId": "R003",
+    "subscription": {
+      "id": "S007",
+      "plan": "toned",
+      "quantityMl": 500,
+      "pricePerLitre": 60,
+      "status": "active",
+      "startDate": "2026-04-01"
+    },
+    "joinDate": "2026-04-01"
+  },
+  {
+    "id": "C008",
+    "name": "Suresh Kumar",
+    "phone": "9654321098",
+    "flat": "House 3",
+    "building": "Fishermen Lane",
+    "area": "Versova",
+    "pincode": "400061",
+    "routeId": "R003",
+    "subscription": {
+      "id": "S008",
+      "plan": "full_cream",
+      "quantityMl": 1000,
+      "pricePerLitre": 72,
+      "status": "active",
+      "startDate": "2025-10-15"
+    },
+    "joinDate": "2025-10-15"
+  }
+]

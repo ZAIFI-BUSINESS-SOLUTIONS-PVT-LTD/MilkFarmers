@@ -1,0 +1,57 @@
+{
+  "summary": {
+    "totalCollected": 48600,
+    "pending": 9360,
+    "overdue": 3300
+  },
+  "monthly": [
+    { "week": "Week 1", "amount": 12400, "month": "June", "year": 2026 },
+    { "week": "Week 2", "amount": 13200, "month": "June", "year": 2026 },
+    { "week": "Week 3", "amount": 11800, "month": "June", "year": 2026 },
+    { "week": "Week 4", "amount": 11200, "month": "June", "year": 2026 },
+    { "week": "Week 1", "amount": 11000, "month": "May", "year": 2026 },
+    { "week": "Week 2", "amount": 12500, "month": "May", "year": 2026 },
+    { "week": "Week 3", "amount": 10800, "month": "May", "year": 2026 },
+    { "week": "Week 4", "amount": 13100, "month": "May", "year": 2026 }
+  ],
+  "trend": [
+    { "day": "Jun 1", "amount": 1840 },
+    { "day": "Jun 2", "amount": 1920 },
+    { "day": "Jun 3", "amount": 1760 },
+    { "day": "Jun 4", "amount": 2100 },
+    { "day": "Jun 5", "amount": 1980 },
+    { "day": "Jun 6", "amount": 1850 },
+    { "day": "Jun 7", "amount": 2200 },
+    { "day": "Jun 8", "amount": 2050 },
+    { "day": "Jun 9", "amount": 1900 },
+    { "day": "Jun 10", "amount": 2300 },
+    { "day": "Jun 11", "amount": 2150 },
+    { "day": "Jun 12", "amount": 1980 },
+    { "day": "Jun 13", "amount": 2400 },
+    { "day": "Jun 14", "amount": 2100 },
+    { "day": "Jun 15", "amount": 1850 },
+    { "day": "Jun 16", "amount": 2250 },
+    { "day": "Jun 17", "amount": 2050 },
+    { "day": "Jun 18", "amount": 1920 },
+    { "day": "Jun 19", "amount": 2380 },
+    { "day": "Jun 20", "amount": 2200 },
+    { "day": "Jun 21", "amount": 1980 },
+    { "day": "Jun 22", "amount": 2450 },
+    { "day": "Jun 23", "amount": 2100 },
+    { "day": "Jun 24", "amount": 1870 },
+    { "day": "Jun 25", "amount": 2300 },
+    { "day": "Jun 26", "amount": 2150 },
+    { "day": "Jun 27", "amount": 1990 },
+    { "day": "Jun 28", "amount": 2500 },
+    { "day": "Jun 29", "amount": 2200 },
+    { "day": "Jun 30", "amount": 1950 }
+  ],
+  "kpi": {
+    "activeSubscribers": 6,
+    "todayDeliveries": 7,
+    "monthlyRevenue": 48600,
+    "pausedAccounts": 1,
+    "newThisWeek": 0,
+    "topRoute": "Route A – Andheri West"
+  }
+}
