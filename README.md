@@ -32,7 +32,7 @@ pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The root page redirects to the Customer splash screen.
+Open [http://localhost:3000](http://localhost:3000). A role-selection landing page lets you enter as Customer, Delivery Executive, or Admin.
 
 ```bash
 # Type-check
@@ -55,16 +55,21 @@ pnpm build
 | Customer | OTP | `1234` |
 | Delivery Executive | Employee ID | `EMP001` |
 | Delivery Executive | PIN | `1234` |
+| Admin | Employee ID | `EMP001` |
+| Admin | PIN | `1234` |
 
 ---
 
 ## Entry Points
 
-| Role | URL |
-|------|-----|
-| Customer | `/customer/splash` |
-| Delivery Executive | `/delivery/login` |
-| Admin | `/admin/dashboard` |
+| Role | URL | Auth |
+|------|-----|------|
+| Landing (role selector) | `/` | — |
+| Customer | `/customer/splash` → `/customer/login` | Phone + OTP |
+| Delivery Executive | `/delivery/login` | Employee ID + PIN |
+| Admin | `/admin/login` | Employee ID + PIN |
+
+All protected routes redirect to their respective login screen if the session is missing. Logout buttons are available in the Delivery and Admin shells.
 
 ---
 
@@ -73,28 +78,29 @@ pnpm build
 ```
 app/
 ├── app/                  # Next.js App Router pages
-│   ├── customer/         # Customer module (splash, login, home, …)
-│   ├── delivery/         # Delivery module (login, route, status)
-│   └── admin/            # Admin module (dashboard, customers, routes, collections)
+│   ├── page.tsx          # Role-selection landing page
+│   ├── customer/         # Customer module (splash, login, home, subscription, …)
+│   ├── delivery/         # Delivery module (login, route, customers, status)
+│   └── admin/            # Admin module (login, dashboard, customers, routes, collections)
 ├── components/
-│   ├── shells/           # Layout shells (CustomerShell, AdminShell, DeliveryShell)
+│   ├── shells/           # Layout shells + auth guards (CustomerShell/Guard, AdminShell/Guard, DeliveryShell/Guard)
 │   ├── cards/            # Reusable card components
-│   └── shared/           # StatusBadge, OTPInput, QuantitySelector, EmptyState
+│   └── shared/           # StatusBadge, OTPInput, QuantitySelector, EmptyState, PageHeader
 ├── data/                 # Mock JSON (customers, routes, payments, orders, collections)
 └── types/                # TypeScript interfaces
 
 docs/                     # Source-of-truth design docs (read-only)
-FINAL_REVIEW.md           # FR compliance, screen coverage, QA results, known limitations
+FINAL_REVIEW.md           # FR compliance, screen coverage, QA results
 ```
 
 ---
 
-## Screens Built (15 / 16)
+## Screens Built (16 / 16)
 
 **Customer (8):** Splash · Login · Home · Subscription · Extra Order · Pause/Resume · Payments · Profile
 
-**Delivery (3):** Login · Today's Route · Delivery Status
+**Delivery (4):** Login · Today's Route · Customer List · Delivery Status
 
-**Admin (4):** Dashboard · Customers · Routes · Collections
+**Admin (5):** Login · Dashboard · Customers · Routes · Collections
 
-See [FINAL_REVIEW.md](./FINAL_REVIEW.md) for full FR compliance matrix, user flow coverage, and known limitations.
+See [FINAL_REVIEW.md](./FINAL_REVIEW.md) for full FR compliance matrix and user flow coverage.
