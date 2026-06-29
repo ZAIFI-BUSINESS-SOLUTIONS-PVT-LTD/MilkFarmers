@@ -78,6 +78,7 @@ export default function AdminCollectionsPage() {
       <Card className="border-0 shadow-sm">
         <CardContent className="p-4">
           <p className="text-sm font-semibold text-foreground mb-4">{month} — Weekly Collections</p>
+          <div className="w-full overflow-x-auto">
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={chartData} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" vertical={false} />
@@ -105,6 +106,7 @@ export default function AdminCollectionsPage() {
               <Bar dataKey="amount" fill="var(--primary)" radius={[6, 6, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </CardContent>
       </Card>
 

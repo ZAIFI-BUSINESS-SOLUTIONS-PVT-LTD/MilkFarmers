@@ -70,10 +70,10 @@ export default function RoutePage() {
 
       {/* CTA to status page */}
       <Link
-        href="/delivery/status"
+        href="/delivery/customers"
         className="flex items-center justify-between w-full p-4 rounded-2xl bg-primary text-primary-foreground font-semibold text-sm"
       >
-        <span>Update Delivery Status</span>
+        <span>View Customer List</span>
         <ChevronRight className="size-4" />
       </Link>
     </div>

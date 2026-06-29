@@ -50,6 +50,7 @@ export default function DashboardPage() {
         <CardContent className="p-4">
           <p className="text-sm font-semibold text-foreground mb-1">Collection Trend — June 2026</p>
           <p className="text-xs text-muted-foreground mb-4">Daily collections (₹)</p>
+          <div className="w-full overflow-x-auto">
           <ResponsiveContainer width="100%" height={200}>
             <LineChart data={trend} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
@@ -85,6 +86,7 @@ export default function DashboardPage() {
               />
             </LineChart>
           </ResponsiveContainer>
+          </div>
         </CardContent>
       </Card>
 
