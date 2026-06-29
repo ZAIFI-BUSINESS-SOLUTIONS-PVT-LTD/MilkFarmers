@@ -44,6 +44,7 @@ export default function LoginPage() {
   const handleVerify = () => {
     if (otp === MOCK_OTP) {
       toast.success("Welcome to Milk Farmers!");
+      sessionStorage.setItem("customer_auth", "1");
       router.replace("/customer/home");
     } else {
       setOtpError(true);
@@ -58,6 +59,7 @@ export default function LoginPage() {
       setTimeout(() => {
         if (val === MOCK_OTP) {
           toast.success("Welcome to Milk Farmers!");
+          sessionStorage.setItem("customer_auth", "1");
           router.replace("/customer/home");
         } else {
           setOtpError(true);

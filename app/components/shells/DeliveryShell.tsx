@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowLeft, Milk } from "lucide-react";
+import DeliveryLogoutButton from "@/components/shells/DeliveryLogoutButton";
 
 const TITLES: Record<string, string> = {
   "/delivery/route": "Today's Route",
@@ -30,6 +31,7 @@ export default function DeliveryShell({ children }: { children: React.ReactNode 
           </div>
         )}
         <h1 className="text-base font-semibold">{title}</h1>
+        <DeliveryLogoutButton />
       </header>
       <main className="flex-1 overflow-y-auto">{children}</main>
     </div>
