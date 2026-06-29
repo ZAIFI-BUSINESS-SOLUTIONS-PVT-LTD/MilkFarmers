@@ -29,7 +29,22 @@ export default function AdminCollectionsPage() {
 
   const chartData = monthly.filter((d) => d.month === month);
 
-  const handleExport = () => toast.success("Export started — CSV will download shortly (demo).");
+  const handleExport = () => {
+    const rows = monthly.filter((d) => d.month === month);
+    const header = "Week,Collected (INR),Pending (INR),Overdue (INR)";
+    const lines = rows.map((r) => `${r.week},${r.amount},0,0`);
+    const csv = [header, ...lines].join("\n");
+
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `collections-${month.toLowerCase()}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+
+    toast.success(`collections-${month.toLowerCase()}.csv downloaded`);
+  };
 
   return (
     <div className="space-y-5">
