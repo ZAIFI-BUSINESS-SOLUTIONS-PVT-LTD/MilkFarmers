@@ -11,8 +11,15 @@ import EmptyState from "@/components/shared/EmptyState";
 import { toast } from "sonner";
 import ordersData from "@/data/orders.json";
 import type { Order } from "@/types";
+import { motion, AnimatePresence } from "framer-motion";
 
 const products = ordersData as Order[];
+
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.07 } } };
+const cardItem = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 280, damping: 24 } },
+};
 
 export default function ExtraOrderPage() {
   const router = useRouter();
@@ -33,18 +40,28 @@ export default function ExtraOrderPage() {
 
   if (confirmed) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-full gap-4 px-6">
+      <motion.div
+        className="flex flex-col items-center justify-center min-h-full gap-4 px-6"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      >
         <div className="size-16 rounded-full bg-emerald-100 flex items-center justify-center">
           <ShoppingBag className="size-8 text-emerald-600" />
         </div>
         <p className="text-lg font-bold text-foreground">Order Confirmed!</p>
         <p className="text-sm text-muted-foreground text-center">Redirecting to home…</p>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="flex flex-col min-h-full">
+    <motion.div
+      className="flex flex-col min-h-full"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
       {/* Top bar */}
       <div className="sticky top-0 z-30 flex items-center gap-3 px-4 py-3 bg-card border-b border-border">
         <button onClick={() => router.back()} className="p-1.5 rounded-lg hover:bg-muted">
@@ -56,63 +73,87 @@ export default function ExtraOrderPage() {
       <div className="flex-1 px-4 py-4 space-y-3 pb-40">
         <p className="text-sm text-muted-foreground">Add items for tomorrow&apos;s delivery</p>
 
-        {products.map((product) => {
-          const qty = quantities[product.id] ?? 0;
-          return (
-            <Card key={product.id} className="border-0 shadow-sm">
-              <CardContent className="p-4 flex items-center gap-4">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-foreground">{product.name}</p>
-                  <p className="text-xs text-muted-foreground">{product.unit} · ₹{product.pricePerUnit}</p>
-                </div>
-                {qty === 0 ? (
-                  <button
-                    onClick={() => setQty(product.id, 1)}
-                    className="text-xs font-semibold text-primary border border-primary rounded-lg px-3 py-1.5 hover:bg-accent transition-colors"
-                  >
-                    Add
-                  </button>
-                ) : (
-                  <QuantitySelector
-                    value={qty}
-                    onChange={(v) => setQty(product.id, v)}
-                    min={0}
-                    max={10}
-                    step={1}
-                  />
-                )}
-              </CardContent>
-            </Card>
-          );
-        })}
+        <motion.div
+          className="space-y-3"
+          variants={container}
+          initial="hidden"
+          animate="show"
+        >
+          {products.map((product) => {
+            const qty = quantities[product.id] ?? 0;
+            return (
+              <motion.div
+                key={product.id}
+                variants={cardItem}
+                whileHover={{ scale: 1.02, y: -2 }}
+              >
+                <Card className="border-0 shadow-sm">
+                  <CardContent className="p-4 flex items-center gap-4">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-semibold text-foreground">{product.name}</p>
+                      <p className="text-xs text-muted-foreground">{product.unit} · ₹{product.pricePerUnit}</p>
+                    </div>
+                    {qty === 0 ? (
+                      <motion.button
+                        onClick={() => setQty(product.id, 1)}
+                        whileTap={{ scale: 0.95 }}
+                        className="text-xs font-semibold text-primary border border-primary rounded-lg px-3 py-1.5 hover:bg-accent transition-colors"
+                      >
+                        Add
+                      </motion.button>
+                    ) : (
+                      <QuantitySelector
+                        value={qty}
+                        onChange={(v) => setQty(product.id, v)}
+                        min={0}
+                        max={10}
+                        step={1}
+                      />
+                    )}
+                  </CardContent>
+                </Card>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
 
       {/* Order Summary */}
-      {cartItems.length === 0 ? null : (
-        <div className="fixed bottom-20 left-0 right-0 px-4 pb-3">
-          <Card className="border-0 shadow-xl">
-            <CardContent className="p-4">
-              <p className="text-xs font-semibold text-muted-foreground mb-2">Order Summary</p>
-              <div className="space-y-1.5 mb-3">
-                {cartItems.map((p) => (
-                  <div key={p.id} className="flex justify-between text-sm">
-                    <span className="text-foreground">{p.name} × {quantities[p.id]}</span>
-                    <span className="font-medium">₹{(quantities[p.id] ?? 0) * p.pricePerUnit}</span>
-                  </div>
-                ))}
-              </div>
-              <Separator className="mb-3" />
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-sm font-semibold">Total</span>
-                <span className="text-lg font-bold text-primary">₹{total}</span>
-              </div>
-              <Button onClick={handleConfirm} className="w-full h-11 font-semibold rounded-xl">
-                Confirm Order
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
-      )}
+      <AnimatePresence>
+        {cartItems.length > 0 && (
+          <motion.div
+            className="fixed bottom-20 left-0 right-0 px-4 pb-3"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+            transition={{ type: "spring", stiffness: 260, damping: 22 }}
+          >
+            <Card className="border-0 shadow-xl">
+              <CardContent className="p-4">
+                <p className="text-xs font-semibold text-muted-foreground mb-2">Order Summary</p>
+                <div className="space-y-1.5 mb-3">
+                  {cartItems.map((p) => (
+                    <div key={p.id} className="flex justify-between text-sm">
+                      <span className="text-foreground">{p.name} × {quantities[p.id]}</span>
+                      <span className="font-medium">₹{(quantities[p.id] ?? 0) * p.pricePerUnit}</span>
+                    </div>
+                  ))}
+                </div>
+                <Separator className="mb-3" />
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-sm font-semibold">Total</span>
+                  <span className="text-lg font-bold text-primary">₹{total}</span>
+                </div>
+                <motion.div whileTap={{ scale: 0.97 }}>
+                  <Button onClick={handleConfirm} className="w-full h-11 font-semibold rounded-xl">
+                    Confirm Order
+                  </Button>
+                </motion.div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {cartItems.length === 0 && (
         <div className="fixed bottom-20 left-0 right-0 flex justify-center px-4 pb-4">
@@ -123,6 +164,6 @@ export default function ExtraOrderPage() {
           />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }
