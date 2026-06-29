@@ -46,7 +46,7 @@ export default function DeliveryStatusPage() {
       <Card className="border-0 shadow-sm">
         <CardContent className="p-4 space-y-2">
           <div className="flex items-center justify-between">
-            <p className="text-sm font-semibold text-foreground">Today's Progress</p>
+            <p className="text-sm font-semibold text-foreground">Today&apos;s Progress</p>
             <p className="text-sm font-bold text-primary">{delivered}/{total} delivered</p>
           </div>
           <Progress value={pct} className="h-2.5 rounded-full" />

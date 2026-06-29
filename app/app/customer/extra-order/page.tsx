@@ -54,7 +54,7 @@ export default function ExtraOrderPage() {
       </div>
 
       <div className="flex-1 px-4 py-4 space-y-3 pb-40">
-        <p className="text-sm text-muted-foreground">Add items for tomorrow's delivery</p>
+        <p className="text-sm text-muted-foreground">Add items for tomorrow&apos;s delivery</p>
 
         {products.map((product) => {
           const qty = quantities[product.id] ?? 0;

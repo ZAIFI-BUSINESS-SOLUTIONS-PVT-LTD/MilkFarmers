@@ -2,7 +2,6 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { ArrowLeft, Milk } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const TITLES: Record<string, string> = {
   "/delivery/route": "Today's Route",

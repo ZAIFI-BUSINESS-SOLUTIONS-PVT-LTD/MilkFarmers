@@ -47,7 +47,7 @@ export default function HomePage() {
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs font-medium text-muted-foreground">Today's Delivery</p>
+                <p className="text-xs font-medium text-muted-foreground">Today&apos;s Delivery</p>
                 <p className="text-base font-semibold text-foreground mt-0.5">
                   {subscription.quantityMl >= 1000
                     ? `${subscription.quantityMl / 1000}L`

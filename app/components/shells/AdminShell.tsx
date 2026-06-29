@@ -23,14 +23,16 @@ const NAV_ITEMS = [
   { href: "/admin/collections", icon: Banknote, label: "Collections" },
 ];
 
-export default function AdminShell({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const [collapsed, setCollapsed] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+interface SidebarProps {
+  pathname: string;
+  collapsed: boolean;
+  setCollapsed: (v: boolean) => void;
+  setMobileOpen: (v: boolean) => void;
+}
 
-  const SidebarContent = () => (
+function Sidebar({ pathname, collapsed, setCollapsed, setMobileOpen }: SidebarProps) {
+  return (
     <nav className="flex flex-col h-full">
-      {/* Logo */}
       <div className={cn("flex items-center gap-2 px-4 py-5 border-b border-border", collapsed && "justify-center px-2")}>
         <div className="flex items-center justify-center size-8 rounded-lg bg-primary text-primary-foreground shrink-0">
           <Milk className="size-4" />
@@ -43,7 +45,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         )}
       </div>
 
-      {/* Nav Links */}
       <div className="flex-1 py-4 space-y-1 px-2">
         {NAV_ITEMS.map(({ href, icon: Icon, label }) => {
           const active = pathname.startsWith(href);
@@ -68,7 +69,6 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         })}
       </div>
 
-      {/* Collapse toggle (desktop only) */}
       <div className="hidden md:flex border-t border-border p-2">
         <button
           onClick={() => setCollapsed(!collapsed)}
@@ -79,45 +79,40 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
       </div>
     </nav>
   );
+}
+
+export default function AdminShell({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen bg-background">
-      {/* Desktop sidebar */}
       <aside
         className={cn(
           "hidden md:flex flex-col bg-card border-r border-border transition-all duration-200 shrink-0",
           collapsed ? "w-16" : "w-56"
         )}
       >
-        <SidebarContent />
+        <Sidebar pathname={pathname} collapsed={collapsed} setCollapsed={setCollapsed} setMobileOpen={setMobileOpen} />
       </aside>
 
-      {/* Mobile overlay */}
       {mobileOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/40 md:hidden"
-          onClick={() => setMobileOpen(false)}
-        />
+        <div className="fixed inset-0 z-40 bg-black/40 md:hidden" onClick={() => setMobileOpen(false)} />
       )}
 
-      {/* Mobile drawer */}
       <aside
         className={cn(
           "fixed left-0 top-0 bottom-0 z-50 w-56 bg-card border-r border-border flex flex-col transition-transform duration-200 md:hidden",
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <SidebarContent />
+        <Sidebar pathname={pathname} collapsed={false} setCollapsed={setCollapsed} setMobileOpen={setMobileOpen} />
       </aside>
 
-      {/* Main content */}
       <div className="flex flex-col flex-1 min-w-0">
-        {/* Mobile top bar */}
         <header className="md:hidden flex items-center gap-3 px-4 py-3 bg-card border-b border-border">
-          <button
-            onClick={() => setMobileOpen(true)}
-            className="p-1.5 rounded-lg text-muted-foreground hover:bg-accent"
-          >
+          <button onClick={() => setMobileOpen(true)} className="p-1.5 rounded-lg text-muted-foreground hover:bg-accent">
             {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
           <div className="flex items-center gap-2">
