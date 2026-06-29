@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import {
   LayoutDashboard,
@@ -13,6 +13,7 @@ import {
   Milk,
   Menu,
   X,
+  LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -28,9 +29,10 @@ interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (v: boolean) => void;
   setMobileOpen: (v: boolean) => void;
+  onLogout: () => void;
 }
 
-function Sidebar({ pathname, collapsed, setCollapsed, setMobileOpen }: SidebarProps) {
+function Sidebar({ pathname, collapsed, setCollapsed, setMobileOpen, onLogout }: SidebarProps) {
   return (
     <nav className="flex flex-col h-full">
       <div className={cn("flex items-center gap-2 px-4 py-5 border-b border-border", collapsed && "justify-center px-2")}>
@@ -69,6 +71,20 @@ function Sidebar({ pathname, collapsed, setCollapsed, setMobileOpen }: SidebarPr
         })}
       </div>
 
+      <div className="border-t border-border px-2 py-2">
+        <button
+          onClick={onLogout}
+          className={cn(
+            "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors w-full text-destructive hover:bg-accent",
+            collapsed && "justify-center px-2"
+          )}
+          title={collapsed ? "Logout" : undefined}
+        >
+          <LogOut className="size-4 shrink-0" />
+          {!collapsed && <span>Logout</span>}
+        </button>
+      </div>
+
       <div className="hidden md:flex border-t border-border p-2">
         <button
           onClick={() => setCollapsed(!collapsed)}
@@ -83,8 +99,14 @@ function Sidebar({ pathname, collapsed, setCollapsed, setMobileOpen }: SidebarPr
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("admin_auth");
+    router.push("/admin/login");
+  };
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -94,7 +116,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           collapsed ? "w-16" : "w-56"
         )}
       >
-        <Sidebar pathname={pathname} collapsed={collapsed} setCollapsed={setCollapsed} setMobileOpen={setMobileOpen} />
+        <Sidebar pathname={pathname} collapsed={collapsed} setCollapsed={setCollapsed} setMobileOpen={setMobileOpen} onLogout={handleLogout} />
       </aside>
 
       {mobileOpen && (
@@ -107,7 +129,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <Sidebar pathname={pathname} collapsed={false} setCollapsed={setCollapsed} setMobileOpen={setMobileOpen} />
+        <Sidebar pathname={pathname} collapsed={false} setCollapsed={setCollapsed} setMobileOpen={setMobileOpen} onLogout={handleLogout} />
       </aside>
 
       <div className="flex flex-col flex-1 min-w-0">

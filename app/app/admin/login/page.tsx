@@ -19,7 +19,8 @@ export default function AdminLoginPage() {
 
   const handleLogin = () => {
     if (empId.toUpperCase() === MOCK_ID && pin === MOCK_PIN) {
-      router.push("/admin/dashboard");
+      sessionStorage.setItem("admin_auth", "1");
+      router.replace("/admin/dashboard");
     } else {
       setError("Invalid credentials");
     }
