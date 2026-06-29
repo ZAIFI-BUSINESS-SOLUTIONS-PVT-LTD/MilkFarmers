@@ -21,6 +21,7 @@ export default function DeliveryLoginPage() {
   const handleLogin = () => {
     if (empId.toUpperCase() === MOCK_ID && pin === MOCK_PIN) {
       toast.success("Welcome, Mohan!");
+      sessionStorage.setItem("delivery_auth", "1");
       router.replace("/delivery/route");
     } else {
       setError("Invalid Employee ID or PIN. Use EMP001 / 1234.");
