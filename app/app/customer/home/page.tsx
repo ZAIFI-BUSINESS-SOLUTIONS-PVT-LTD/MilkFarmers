@@ -16,6 +16,13 @@ import type { Customer } from "@/types";
 
 const customer = (customersData as Customer[])[0];
 
+function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return "Good morning";
+  if (h < 17) return "Good afternoon";
+  return "Good evening";
+}
+
 const QUICK_ACTIONS = [
   { href: "/customer/subscription", icon: CalendarCheck, label: "Subscription", color: "bg-emerald-50 text-emerald-600" },
   { href: "/customer/extra-order", icon: ShoppingBag, label: "Extra Order", color: "bg-blue-50 text-blue-600" },
@@ -37,7 +44,7 @@ export default function HomePage() {
           <Milk className="size-4 text-white/80" />
           <span className="text-white/80 text-xs font-medium">Milk Farmers</span>
         </div>
-        <h1 className="text-2xl font-bold text-white">Good morning, {firstName} 👋</h1>
+        <h1 className="text-2xl font-bold text-white">{getGreeting()}, {firstName} 👋</h1>
         <p className="text-white/70 text-sm mt-0.5">Your fresh milk is on the way</p>
       </div>
 

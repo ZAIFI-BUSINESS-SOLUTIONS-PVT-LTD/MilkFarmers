@@ -1,5 +1,10 @@
 import CustomerShell from "@/components/shells/CustomerShell";
+import CustomerGuard from "@/components/shells/CustomerGuard";
 
 export default function CustomerLayout({ children }: { children: React.ReactNode }) {
-  return <CustomerShell>{children}</CustomerShell>;
+  return (
+    <CustomerGuard>
+      <CustomerShell>{children}</CustomerShell>
+    </CustomerGuard>
+  );
 }
