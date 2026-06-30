@@ -11,8 +11,19 @@ import StatusBadge from "@/components/shared/StatusBadge";
 import PageHeader from "@/components/shared/PageHeader";
 import routesData from "@/data/routes.json";
 import type { Route } from "@/types";
+import { motion } from "framer-motion";
 
 const EXECS = ["Mohan Das", "Raju Singh", "Prakash Rao", "Sunil Kumar"];
+
+const listContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07 } },
+};
+
+const listItem = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
+};
 
 export default function AdminRoutesPage() {
   const [search, setSearch] = useState("");
@@ -28,7 +39,12 @@ export default function AdminRoutesPage() {
   );
 
   return (
-    <div className="space-y-4">
+    <motion.div
+      className="space-y-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
       <PageHeader title="Routes" subtitle={`${routes.length} active routes`} />
 
       <div className="relative">
@@ -41,15 +57,26 @@ export default function AdminRoutesPage() {
         />
       </div>
 
-      <div className="space-y-2">
+      <motion.div
+        className="space-y-2"
+        variants={listContainer}
+        initial="hidden"
+        animate="show"
+      >
         {filtered.map((route) => (
-          <RouteCard
+          <motion.div
             key={route.id}
-            route={{ ...route, execName: assignments[route.id] }}
-            onClick={() => setSelected(route)}
-          />
+            variants={listItem}
+            whileHover={{ scale: 1.015, y: -2 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <RouteCard
+              route={{ ...route, execName: assignments[route.id] }}
+              onClick={() => setSelected(route)}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       <Sheet open={!!selected} onOpenChange={(o) => !o && setSelected(null)}>
         <SheetContent side="right" className="w-full sm:max-w-sm overflow-y-auto">
@@ -106,6 +133,6 @@ export default function AdminRoutesPage() {
           )}
         </SheetContent>
       </Sheet>
-    </div>
+    </motion.div>
   );
 }

@@ -12,6 +12,7 @@ import StatusBadge from "@/components/shared/StatusBadge";
 import PageHeader from "@/components/shared/PageHeader";
 import customersData from "@/data/customers.json";
 import type { Customer, SubscriptionStatus } from "@/types";
+import { motion } from "framer-motion";
 
 const PLAN_LABELS: Record<string, string> = { toned: "Toned", full_cream: "Full Cream", a2_gir: "A2 Gir" };
 const FILTERS: { label: string; value: SubscriptionStatus | "all" }[] = [
@@ -22,6 +23,16 @@ const FILTERS: { label: string; value: SubscriptionStatus | "all" }[] = [
 ];
 
 const PER_PAGE = 6;
+
+const listContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
+const listItem = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
+};
 
 export default function AdminCustomersPage() {
   const [search, setSearch] = useState("");
@@ -43,7 +54,12 @@ export default function AdminCustomersPage() {
   const hasMore = filtered.length > paged.length;
 
   return (
-    <div className="space-y-4">
+    <motion.div
+      className="space-y-4"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
       <PageHeader title="Customers" subtitle={`${customers.length} total customers`} />
 
       {/* Search */}
@@ -69,15 +85,22 @@ export default function AdminCustomersPage() {
       </Tabs>
 
       {/* Customer list */}
-      <div className="space-y-2">
+      <motion.div
+        className="space-y-2"
+        variants={listContainer}
+        initial="hidden"
+        animate="show"
+      >
         {paged.length === 0 ? (
           <p className="text-sm text-muted-foreground text-center py-8">No customers found</p>
         ) : (
           paged.map((c) => (
-            <CustomerCard key={c.id} customer={c} onClick={() => setSelected(c)} />
+            <motion.div key={c.id} variants={listItem} whileHover={{ x: 3 }}>
+              <CustomerCard customer={c} onClick={() => setSelected(c)} />
+            </motion.div>
           ))
         )}
-      </div>
+      </motion.div>
 
       {hasMore && (
         <button
@@ -141,6 +164,6 @@ export default function AdminCustomersPage() {
           )}
         </SheetContent>
       </Sheet>
-    </div>
+    </motion.div>
   );
 }

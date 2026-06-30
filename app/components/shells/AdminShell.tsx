@@ -16,6 +16,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 const NAV_ITEMS = [
   { href: "/admin/dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -56,14 +57,22 @@ function Sidebar({ pathname, collapsed, setCollapsed, setMobileOpen, onLogout }:
               href={href}
               onClick={() => setMobileOpen(false)}
               className={cn(
-                "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
+                "relative flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
                 active
-                  ? "bg-primary text-primary-foreground"
+                  ? "text-primary-foreground"
                   : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
                 collapsed && "justify-center px-2"
               )}
               title={collapsed ? label : undefined}
             >
+              {active && (
+                <motion.div
+                  layoutId="admin-nav-bg"
+                  className="absolute inset-0 rounded-xl bg-primary"
+                  style={{ zIndex: -1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
               <Icon className="size-4 shrink-0" />
               {!collapsed && <span>{label}</span>}
             </Link>
