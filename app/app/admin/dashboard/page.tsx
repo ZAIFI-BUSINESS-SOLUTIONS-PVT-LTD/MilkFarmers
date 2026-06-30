@@ -14,6 +14,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import collectionsData from "@/data/collections.json";
+import { motion } from "framer-motion";
 
 const { kpi, trend } = collectionsData;
 
@@ -24,9 +25,24 @@ const KPI_CARDS = [
   { title: "Paused Accounts", value: kpi.pausedAccounts, icon: PauseCircle, trend: -5 },
 ];
 
+const kpiContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const kpiItem = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
+};
+
 export default function DashboardPage() {
   return (
-    <div className="space-y-6">
+    <motion.div
+      className="space-y-6"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
       <PageHeader
         title="Dashboard"
         subtitle="Overview for June 2026"
@@ -39,56 +55,69 @@ export default function DashboardPage() {
       />
 
       {/* KPI Grid */}
-      <div className="grid grid-cols-2 gap-3">
+      <motion.div
+        className="grid grid-cols-2 gap-3"
+        variants={kpiContainer}
+        initial="hidden"
+        animate="show"
+      >
         {KPI_CARDS.map((card) => (
-          <DashboardCard key={card.title} {...card} />
+          <motion.div key={card.title} variants={kpiItem}>
+            <DashboardCard {...card} />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Trend Chart */}
-      <Card className="border-0 shadow-sm">
-        <CardContent className="p-4">
-          <p className="text-sm font-semibold text-foreground mb-1">Collection Trend — June 2026</p>
-          <p className="text-xs text-muted-foreground mb-4">Daily collections (₹)</p>
-          <div className="w-full overflow-x-auto">
-          <ResponsiveContainer width="100%" height={200}>
-            <LineChart data={trend} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
-              <XAxis
-                dataKey="day"
-                tick={{ fontSize: 9, fill: "var(--muted-foreground)" }}
-                tickLine={false}
-                axisLine={false}
-                interval={4}
-              />
-              <YAxis
-                tick={{ fontSize: 9, fill: "var(--muted-foreground)" }}
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(v) => `₹${(v / 1000).toFixed(1)}k`}
-              />
-              <Tooltip
-                contentStyle={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
-                  borderRadius: "0.75rem",
-                  fontSize: 12,
-                }}
-                formatter={(v) => [`₹${Number(v).toLocaleString("en-IN")}`, "Collection"]}
-              />
-              <Line
-                type="monotone"
-                dataKey="amount"
-                stroke="var(--primary)"
-                strokeWidth={2}
-                dot={false}
-                activeDot={{ r: 4 }}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
+      <motion.div
+        initial={{ opacity: 0, scaleY: 0.9, originY: 1 }}
+        animate={{ opacity: 1, scaleY: 1 }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+      >
+        <Card className="border-0 shadow-sm">
+          <CardContent className="p-4">
+            <p className="text-sm font-semibold text-foreground mb-1">Collection Trend — June 2026</p>
+            <p className="text-xs text-muted-foreground mb-4">Daily collections (₹)</p>
+            <div className="w-full overflow-x-auto">
+            <ResponsiveContainer width="100%" height={200}>
+              <LineChart data={trend} margin={{ top: 4, right: 8, left: -20, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <XAxis
+                  dataKey="day"
+                  tick={{ fontSize: 9, fill: "var(--muted-foreground)" }}
+                  tickLine={false}
+                  axisLine={false}
+                  interval={4}
+                />
+                <YAxis
+                  tick={{ fontSize: 9, fill: "var(--muted-foreground)" }}
+                  tickLine={false}
+                  axisLine={false}
+                  tickFormatter={(v) => `₹${(v / 1000).toFixed(1)}k`}
+                />
+                <Tooltip
+                  contentStyle={{
+                    background: "var(--card)",
+                    border: "1px solid var(--border)",
+                    borderRadius: "0.75rem",
+                    fontSize: 12,
+                  }}
+                  formatter={(v) => [`₹${Number(v).toLocaleString("en-IN")}`, "Collection"]}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="amount"
+                  stroke="var(--primary)"
+                  strokeWidth={2}
+                  dot={false}
+                  activeDot={{ r: 4 }}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
       {/* Quick stats */}
       <div className="grid grid-cols-2 gap-3">
@@ -105,6 +134,6 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </motion.div>
   );
 }
